@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-public class GitHubController {
+public class FacebookController {
 
-    @GetMapping("/github")
+    @GetMapping("/facebook")
     public String hello(@AuthenticationPrincipal OAuth2User principal) {
         Map<String, Object> attributes = principal.getAttributes();
         return attributes.toString();
