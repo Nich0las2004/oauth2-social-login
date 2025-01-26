@@ -22,7 +22,7 @@ public class SecurityConfig {
                 .headers(HeadersConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/h2-console/**").permitAll()
-                        .requestMatchers("/register").permitAll()
+                        .requestMatchers("/register", "/register-success").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(Customizer.withDefaults())

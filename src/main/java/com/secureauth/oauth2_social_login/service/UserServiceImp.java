@@ -36,4 +36,8 @@ public class UserServiceImp implements UserService {
         return newUser;
     }
 
+    public void registerUser(User user) {
+        userRepository.save(user);
+    }
+
 }
