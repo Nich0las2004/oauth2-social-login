@@ -22,8 +22,10 @@ public class SecurityConfig {
                 .headers(HeadersConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/register").permitAll()
                         .anyRequest().authenticated()
                 )
+                .formLogin(Customizer.withDefaults())
                 .oauth2Login(Customizer.withDefaults())
         ;
 
