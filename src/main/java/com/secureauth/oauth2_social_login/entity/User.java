@@ -9,19 +9,43 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+//    fields for regular registration
+    private String username;
+    private String email;
+    private String password;
+
+//    fields for gitHub
+    private int githubUserId;
+
+//    fields for facebook
+    private String facebookUserId;
+
+//    fields for both facebook and GitHub
     private String name;
     private String provider;
-    private int userId;
-    private String email;
+
 
     public User() {
     }
 
-    public User(String name, String provider, int userId, String email) {
+    public User(String name, String provider, int githubUserId, String email) {
         this.name = name;
         this.provider = provider;
-        this.userId = userId;
+        this.githubUserId = githubUserId;
         this.email = email;
+    }
+
+    public User(String name, String provider, String facebookUserId, String email) {
+        this.name = name;
+        this.provider = provider;
+        this.facebookUserId = facebookUserId;
+        this.email = email;
+    }
+
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
     public Long getId() {
@@ -30,6 +54,22 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
@@ -48,12 +88,20 @@ public class User {
         this.provider = provider;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getGithubUserId() {
+        return githubUserId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setGithubUserId(int githubUserId) {
+        this.githubUserId = githubUserId;
+    }
+
+    public String getFacebookUserId() {
+        return facebookUserId;
+    }
+
+    public void setFacebookUserId(String facebookUserId) {
+        this.facebookUserId = facebookUserId;
     }
 
     public String getEmail() {
