@@ -36,6 +36,7 @@ public class UserServiceImp implements UserService {
         return newUser;
     }
 
+    @Override
     public void registerUser(User user) {
         userRepository.save(user);
     }
