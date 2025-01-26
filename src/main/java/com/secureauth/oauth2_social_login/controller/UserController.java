@@ -32,7 +32,7 @@ public class UserController {
 
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
-        userDTO.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
+        user.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
 
         userService.registerUser(user);
 
