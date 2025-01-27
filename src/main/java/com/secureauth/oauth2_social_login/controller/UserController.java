@@ -2,7 +2,7 @@ package com.secureauth.oauth2_social_login.controller;
 
 import com.secureauth.oauth2_social_login.dto.UserDTO;
 import com.secureauth.oauth2_social_login.entity.User;
-import com.secureauth.oauth2_social_login.service.UserService;
+import com.secureauth.oauth2_social_login.service.user.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
