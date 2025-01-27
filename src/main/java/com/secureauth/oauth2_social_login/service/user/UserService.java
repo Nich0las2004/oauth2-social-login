@@ -1,4 +1,4 @@
-package com.secureauth.oauth2_social_login.service;
+package com.secureauth.oauth2_social_login.service.user;
 
 
 import com.secureauth.oauth2_social_login.entity.User;

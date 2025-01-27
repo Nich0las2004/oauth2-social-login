@@ -2,7 +2,7 @@ package com.secureauth.oauth2_social_login.controller;
 
 import com.secureauth.oauth2_social_login.entity.User;
 import com.secureauth.oauth2_social_login.model.AuthProvider;
-import com.secureauth.oauth2_social_login.service.UserService;
+import com.secureauth.oauth2_social_login.service.user.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
