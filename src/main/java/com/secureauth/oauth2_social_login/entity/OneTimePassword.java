@@ -8,8 +8,6 @@ import lombok.*;
 
 import java.util.Date;
 
-@Getter
-@Setter
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -22,4 +20,24 @@ public class OneTimePassword {
     private Integer oneTimePasswordCode;
     @NonNull
     private Date expires;
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public Integer getOneTimePasswordCode() {
+        return oneTimePasswordCode;
+    }
+    public void setOneTimePasswordCode(Integer oneTimePasswordCode) {
+        this.oneTimePasswordCode = oneTimePasswordCode;
+    }
+    public Date getExpires() {
+        return expires;
+    }
+    public void setExpires(Date expires) {
+        this.expires = expires;
+    }
+
 }
