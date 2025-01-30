@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Facebook Login Success</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #1877f2;
+        }
+
+        .user-info {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .facebook-logo {
+            width: 80px;
+            height: 80px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/2023_Facebook_icon.svg/1024px-2023_Facebook_icon.svg.png" class="facebook-logo" alt="Facebook Logo">
+        <h1>Welcome, <span th:text="${user.name}"></span>!</h1>
+        <p>You have successfully logged in using Facebook.</p>
+
+        <div class="user-info">
+            <p><strong>Facebook Email:</strong> <span th:text="${user.email}"></span></p>
+        </div>
+    </div>
+</body>
+</html>
