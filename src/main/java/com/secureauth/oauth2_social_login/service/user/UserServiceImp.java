@@ -27,6 +27,7 @@ public class UserServiceImp implements UserService {
             newUser.setFacebookUserId(principal.getAttribute("id"));
         else if(provider.equals("github")){
             newUser.setGithubUserId(principal.getAttribute("id"));
+            newUser.setUsername(principal.getAttribute("login"));
         }
         newUser.setProvider(provider);
         newUser.setEmail(principal.getAttribute("email"));
