@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .user-info {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .logout-btn {
+            background-color: #e3342f;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logout-btn:hover {
+            background-color: #cc1f1a;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, <span th:text="${user.username}"></span>!</h1>
+        <p class="user-info"><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+
+<!--        <form th:action="@{/logout}" method="post">-->
+<!--            <button type="submit" class="logout-btn">Log Out</button>-->
+<!--        </form>-->
+        <form th:action="@{/logout}" method="post" class="mt-6">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+</body>
+</html>
