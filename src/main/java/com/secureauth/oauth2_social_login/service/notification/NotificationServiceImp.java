@@ -22,6 +22,9 @@ public class NotificationServiceImp implements NotificationService {
         mail.setText(content);
         mail.setTo(email);
 
+        System.out.println("📧 Mock Email Sent to: " + email);
+        System.out.println("Message: " + content);
+
         this.javaMailSender.send(mail);
     }
 }

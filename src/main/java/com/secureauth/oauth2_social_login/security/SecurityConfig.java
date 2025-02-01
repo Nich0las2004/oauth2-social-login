@@ -23,6 +23,7 @@ public class SecurityConfig {
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/register", "/register-success").permitAll()
                         .requestMatchers("/otp/create").permitAll()
+                        .requestMatchers("/notifications").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(login -> login
