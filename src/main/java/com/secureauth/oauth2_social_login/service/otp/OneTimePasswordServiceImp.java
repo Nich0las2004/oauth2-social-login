@@ -9,7 +9,6 @@ import java.util.Date;
 
 @Service
 public class OneTimePasswordServiceImp implements OneTimePasswordService{
-    private final Long expiryInterval = 5L * 60 * 1000;
 
     private final OneTimePasswordRepository oneTimePasswordRepository;
 
@@ -22,15 +21,17 @@ public class OneTimePasswordServiceImp implements OneTimePasswordService{
     }
 
     @Override
-    public OneTimePassword returnOneTimePassword() {
+    public String returnOneTimePassword() {
         OneTimePassword oneTimePassword = new OneTimePassword();
 
-        oneTimePassword.setOneTimePasswordCode(oneTimePasswordHelpService.createRandomOneTimePassword().get());
+        String otp = String.valueOf(oneTimePasswordHelpService.createRandomOneTimePassword().get());
+        oneTimePassword.setOneTimePasswordCode(Integer.valueOf(otp));
+        long expiryInterval = 5L * 60 * 1000;
         oneTimePassword.setExpires(new Date(System.currentTimeMillis() + expiryInterval));
 
         oneTimePasswordRepository.save(oneTimePassword);
 
-        return oneTimePassword;
+        return otp;
     }
 
 }
