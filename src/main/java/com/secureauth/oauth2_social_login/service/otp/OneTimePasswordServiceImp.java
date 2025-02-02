@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class OneTimePasswordServiceImp implements OneTimePasswordService{
@@ -25,13 +26,26 @@ public class OneTimePasswordServiceImp implements OneTimePasswordService{
         OneTimePassword oneTimePassword = new OneTimePassword();
 
         String otp = String.valueOf(oneTimePasswordHelpService.createRandomOneTimePassword().get());
-        oneTimePassword.setOneTimePasswordCode(Integer.valueOf(otp));
+        oneTimePassword.setOneTimePasswordCode(otp);
         long expiryInterval = 5L * 60 * 1000;
         oneTimePassword.setExpires(new Date(System.currentTimeMillis() + expiryInterval));
 
         oneTimePasswordRepository.save(oneTimePassword);
 
         return otp;
+    }
+
+    @Override
+    public boolean validateOneTimePassword(String otp) {
+        Optional<OneTimePassword> storedOtp = oneTimePasswordRepository.findByOneTimePasswordCode(otp);
+
+        if (storedOtp.isEmpty()) {
+            return false;
+        }
+
+        OneTimePassword otpEntity = storedOtp.get();
+
+        return !otpEntity.getExpires().before(new Date());
     }
 
 }
