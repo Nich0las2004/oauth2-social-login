@@ -22,7 +22,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/register", "/register-success").permitAll()
-                        .requestMatchers("/otp/create").permitAll()
+                        .requestMatchers("/otp/create", "/otp/validate").permitAll()
                         .requestMatchers("/notifications").permitAll()
                         .anyRequest().authenticated()
                 )

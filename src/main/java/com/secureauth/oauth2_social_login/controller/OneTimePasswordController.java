@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +26,8 @@ public class OneTimePasswordController {
         this.notificationService = notificationService;
     }
 
+//    mock email: http://localhost:8080/otp/create?email=user@example.com
+
     @GetMapping("/otp/create")
     public ResponseEntity<Map<String, String>> createOTP(@RequestParam String email) {
         try {
@@ -42,6 +45,28 @@ public class OneTimePasswordController {
         } catch (Exception exception) {
             Map<String, String> errorResponse = new HashMap<>();
             errorResponse.put("error", "Failed to send OTP");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+        }
+    }
+
+    @PostMapping("/otp/validate")
+    public ResponseEntity<Map<String, String>> validateOTP(@RequestParam String otp) {
+        try {
+            boolean isValid = oneTimePasswordService.validateOneTimePassword(otp);
+
+            if (isValid) {
+                Map<String, String> response = new HashMap<>();
+                response.put("message", "OTP is valid");
+                return ResponseEntity.ok(response);
+            } else {
+                Map<String, String> errorResponse = new HashMap<>();
+                errorResponse.put("error", "OTP is invalid");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+            }
+
+        } catch (Exception exception) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Failed to validate OTP");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
     }
