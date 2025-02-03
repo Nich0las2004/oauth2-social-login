@@ -2,6 +2,8 @@ package com.secureauth.oauth2_social_login.service.otp;
 
 import com.secureauth.oauth2_social_login.entity.OneTimePassword;
 import com.secureauth.oauth2_social_login.repository.OneTimePasswordRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +12,8 @@ import java.util.Optional;
 
 @Service
 public class OneTimePasswordServiceImp implements OneTimePasswordService{
-
+    private static final Logger logger = LoggerFactory.getLogger(OneTimePasswordServiceImp.class);
     private final OneTimePasswordRepository oneTimePasswordRepository;
-
     private final OneTimePasswordHelpService oneTimePasswordHelpService;
 
     @Autowired
@@ -40,8 +41,11 @@ public class OneTimePasswordServiceImp implements OneTimePasswordService{
         Optional<OneTimePassword> storedOtp = oneTimePasswordRepository.findByOneTimePasswordCode(otp);
 
         if (storedOtp.isEmpty()) {
+            logger.warn("Failed OTP validation attempt for OTP: {}", otp);
             return false;
         }
+
+        logger.info("OTP successfully validated.");
 
         OneTimePassword otpEntity = storedOtp.get();
 
