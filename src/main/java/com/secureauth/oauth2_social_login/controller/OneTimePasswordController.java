@@ -1,6 +1,7 @@
 package com.secureauth.oauth2_social_login.controller;
 
 import com.secureauth.oauth2_social_login.dto.NotificationRequest;
+import com.secureauth.oauth2_social_login.repository.UserRepository;
 import com.secureauth.oauth2_social_login.service.notification.NotificationService;
 import com.secureauth.oauth2_social_login.service.otp.OneTimePasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +20,27 @@ public class OneTimePasswordController {
 
     private final OneTimePasswordService oneTimePasswordService;
     private final NotificationService notificationService;
+    private final UserRepository userRepository;
 
     @Autowired
-    public OneTimePasswordController(OneTimePasswordService oneTimePasswordService, NotificationService notificationService) {
+    public OneTimePasswordController(OneTimePasswordService oneTimePasswordService, NotificationService notificationService, UserRepository userRepository) {
         this.oneTimePasswordService = oneTimePasswordService;
         this.notificationService = notificationService;
+        this.userRepository = userRepository;
     }
 
 //    mock email: http://localhost:8080/otp/create?email=user@example.com
 
     @GetMapping("/otp/create")
-    public String createOTPForm(@RequestParam(required = false) String email, Model model) {
-        if (email != null && !email.isEmpty()) {
+    public String createOTPForm(Model model) {
             try {
+                Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+                String username = auth.getName();
+
+                com.secureauth.oauth2_social_login.entity.User user = userRepository.findByUsername(username);
+
+                String email = user.getEmail();
+
                 String otp = oneTimePasswordService.returnOneTimePassword();
                 String message = "Your One-Time Password (OTP) is: " + otp;
 
@@ -42,7 +51,6 @@ public class OneTimePasswordController {
             } catch (Exception exception) {
                 model.addAttribute("error", "Failed to send OTP");
             }
-        }
         return "otp";
     }
 
