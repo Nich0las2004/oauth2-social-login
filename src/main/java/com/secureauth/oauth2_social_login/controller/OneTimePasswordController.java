@@ -4,6 +4,9 @@ import com.secureauth.oauth2_social_login.dto.NotificationRequest;
 import com.secureauth.oauth2_social_login.service.notification.NotificationService;
 import com.secureauth.oauth2_social_login.service.otp.OneTimePasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,8 +52,14 @@ public class OneTimePasswordController {
             boolean isValid = oneTimePasswordService.validateOneTimePassword(otp);
 
             if (isValid) {
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                User user = (User) authentication.getPrincipal();
+
                 model.addAttribute("message", "OTP is valid");
-                return "otp";
+
+                model.addAttribute("user", user);
+
+                return "redirect:/dashboard";
             } else {
                 model.addAttribute("error", "OTP is invalid");
                 return "otp";
