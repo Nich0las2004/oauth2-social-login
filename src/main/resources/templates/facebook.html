@@ -33,6 +33,24 @@
             color: #333;
         }
 
+        .logout-btn {
+            margin-top: 30px;
+            background-color: #e3342f;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logout-btn:hover {
+            background-color: #cc1f1a;
+            transform: scale(1.05);
+        }
+
         .facebook-logo {
             width: 80px;
             height: 80px;
@@ -54,6 +72,10 @@
         <div class="user-info">
             <p><strong>Facebook Email:</strong> <span th:text="${user.email}"></span></p>
         </div>
+
+        <form th:action="@{/logout}" method="post" class="mt-6">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
     </div>
 </body>
 </html>
