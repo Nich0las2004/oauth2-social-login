@@ -61,10 +61,6 @@
     <div class="container">
         <h1>Welcome, <span th:text="${user.username}"></span>!</h1>
         <p class="user-info"><strong>Email:</strong> <span th:text="${user.email}"></span></p>
-
-<!--        <form th:action="@{/logout}" method="post">-->
-<!--            <button type="submit" class="logout-btn">Log Out</button>-->
-<!--        </form>-->
         <form th:action="@{/logout}" method="post" class="mt-6">
             <button type="submit" class="logout-btn">Logout</button>
         </form>

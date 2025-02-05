@@ -43,7 +43,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .formLogin(login -> login
-                        .defaultSuccessUrl("/dashboard", true))
+                        .defaultSuccessUrl("/otp/create", true))
                 .oauth2Login(oauth2 -> oauth2.successHandler(successHandler))
         ;
 
