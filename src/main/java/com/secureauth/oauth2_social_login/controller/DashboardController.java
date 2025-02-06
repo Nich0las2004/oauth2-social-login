@@ -23,8 +23,6 @@ public class DashboardController {
 
         User user = userRepository.findByUsername(auth.getName());
 
-        System.out.println(auth.getName());
-
         model.addAttribute("user", user);
 
 

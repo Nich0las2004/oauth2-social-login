@@ -29,8 +29,6 @@ public class OneTimePasswordController {
         this.userRepository = userRepository;
     }
 
-//    mock email: http://localhost:8080/otp/create?email=user@example.com
-
     @GetMapping("/otp/create")
     public String createOTPForm(Model model) {
             try {
