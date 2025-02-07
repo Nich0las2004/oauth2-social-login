@@ -23,6 +23,17 @@
             padding: 12px;
             border-radius: 5px;
         }
+        .login-link {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .login-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
         </style>
 </head>
 <body>
@@ -42,6 +53,9 @@
             <input type="password" class="form-control" id="password" name="password" th:field="*{password}" required>
         </div>
         <button type="submit" class="btn btn-primary">Register</button>
+        <div class="login-link">
+            <p>Already have an account? <a href="/login">Login here</a></p>
+        </div>
     </form>
 </div>
 </body>
