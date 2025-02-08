@@ -1,5 +1,6 @@
-package com.secureauth.oauth2_social_login.service.notification;
+package com.secureauth.oauth2_social_login.unit.service.notification;
 
+import com.secureauth.oauth2_social_login.service.notification.NotificationServiceImp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

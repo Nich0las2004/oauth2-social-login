@@ -1,7 +1,8 @@
-package com.secureauth.oauth2_social_login.security;
+package com.secureauth.oauth2_social_login.unit.security;
 
 import com.secureauth.oauth2_social_login.entity.User;
 import com.secureauth.oauth2_social_login.repository.UserRepository;
+import com.secureauth.oauth2_social_login.security.CustomUserDetailsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

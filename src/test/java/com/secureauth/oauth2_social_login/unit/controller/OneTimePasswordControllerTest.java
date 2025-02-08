@@ -1,5 +1,6 @@
-package com.secureauth.oauth2_social_login.controller;
+package com.secureauth.oauth2_social_login.unit.controller;
 
+import com.secureauth.oauth2_social_login.controller.OneTimePasswordController;
 import com.secureauth.oauth2_social_login.entity.User;
 import com.secureauth.oauth2_social_login.repository.UserRepository;
 import com.secureauth.oauth2_social_login.service.notification.NotificationService;

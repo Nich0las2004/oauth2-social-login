@@ -1,5 +1,6 @@
-package com.secureauth.oauth2_social_login.controller;
+package com.secureauth.oauth2_social_login.unit.controller;
 
+import com.secureauth.oauth2_social_login.controller.UserController;
 import com.secureauth.oauth2_social_login.dto.UserDTO;
 import com.secureauth.oauth2_social_login.service.user.UserService;
 import org.junit.jupiter.api.BeforeEach;
