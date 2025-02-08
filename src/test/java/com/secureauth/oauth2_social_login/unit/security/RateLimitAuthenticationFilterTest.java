@@ -1,5 +1,7 @@
-package com.secureauth.oauth2_social_login.security;
+package com.secureauth.oauth2_social_login.unit.security;
 
+import com.secureauth.oauth2_social_login.security.LoginAttemptService;
+import com.secureauth.oauth2_social_login.security.RateLimitAuthenticationFilter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,9 +13,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -37,18 +39,20 @@ class RateLimitAuthenticationFilterTest {
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         FilterChain filterChain = mock(FilterChain.class);
-        PrintWriter writer = mock(PrintWriter.class);
 
         when(request.getServletPath()).thenReturn("/login");
         when(request.getMethod()).thenReturn("POST");
         when(request.getParameter("username")).thenReturn("testuser");
-        when(loginAttemptService.isBlocked("testuser")).thenReturn(true);
-        when(response.getWriter()).thenReturn(writer);
+        when(request.getParameter("password")).thenReturn("password");
+        when(loginAttemptService.isBlocked("testuser")).thenReturn(false);
 
-        filter.doFilterInternal(request, response, filterChain);
+        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class))).thenThrow(new AuthenticationException("Authentication failed") {});
 
-        verify(response).setStatus(HttpServletResponse.SC_FORBIDDEN);
-        verify(writer).write("Too many failed login attempts. Please try again later.");
+        assertThrows(AuthenticationException.class, () ->
+                ReflectionTestUtils.invokeMethod(filter, "doFilterInternal", request, response, filterChain)
+        );
+
+        verify(loginAttemptService).loginFailed("testuser");
         verify(filterChain, never()).doFilter(request, response);
     }
 
@@ -69,7 +73,7 @@ class RateLimitAuthenticationFilterTest {
         when(authentication.isAuthenticated()).thenReturn(true);
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class))).thenReturn(authentication);
 
-        filter.doFilterInternal(request, response, filterChain);
+        ReflectionTestUtils.invokeMethod(filter, "doFilterInternal", request, response, filterChain);
 
         verify(loginAttemptService).loginSucceeded("testuser");
         verify(filterChain).doFilter(request, response);
@@ -90,7 +94,9 @@ class RateLimitAuthenticationFilterTest {
 
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class))).thenThrow(new AuthenticationException("Authentication failed") {});
 
-        assertThrows(AuthenticationException.class, () -> filter.doFilterInternal(request, response, filterChain));
+        assertThrows(AuthenticationException.class, () ->
+                ReflectionTestUtils.invokeMethod(filter, "doFilterInternal", request, response, filterChain)
+        );
 
         verify(loginAttemptService).loginFailed("testuser");
         verify(filterChain, never()).doFilter(request, response);

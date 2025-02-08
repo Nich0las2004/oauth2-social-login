@@ -1,6 +1,7 @@
-package com.secureauth.oauth2_social_login.security;
+package com.secureauth.oauth2_social_login.unit.security;
 
 import com.secureauth.oauth2_social_login.model.AuthProvider;
+import com.secureauth.oauth2_social_login.security.CustomOAuth2SuccessHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

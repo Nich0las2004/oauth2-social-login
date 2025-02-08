@@ -1,5 +1,6 @@
-package com.secureauth.oauth2_social_login.controller;
+package com.secureauth.oauth2_social_login.unit.controller;
 
+import com.secureauth.oauth2_social_login.controller.GitHubController;
 import com.secureauth.oauth2_social_login.entity.User;
 import com.secureauth.oauth2_social_login.model.AuthProvider;
 import com.secureauth.oauth2_social_login.service.user.UserService;

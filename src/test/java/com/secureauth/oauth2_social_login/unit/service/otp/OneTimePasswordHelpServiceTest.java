@@ -1,5 +1,6 @@
-package com.secureauth.oauth2_social_login.service.otp;
+package com.secureauth.oauth2_social_login.unit.service.otp;
 
+import com.secureauth.oauth2_social_login.service.otp.OneTimePasswordHelpService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
